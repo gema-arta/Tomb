@@ -1585,24 +1585,26 @@ index_tombs() {
 DefaultContents TXT*
 
 # exclude images
-FileRules filename regex /\.jp.?g/
-FileRules filename regex /.png/
-FileRules filename regex /.gif/
-FileRules filename regex /.tiff/
-FileRules filename regex /.svg/
+FileRules filename regex /\.jp.?g/i
+FileRules filename regex /.png/i
+FileRules filename regex /.gif/i
+FileRules filename regex /.tiff/i
+FileRules filename regex /.svg/i
+FileRules filename regex /.xcf/i
+FileRules filename regex /.eps/i
 # exclude audio
-FileRules filename regex /.mp3/
-FileRules filename regex /.ogg/
-FileRules filename regex /.wav/
-FileRules filename regex /.mod/
-FileRules filename regex /.xm/
+FileRules filename regex /.mp3/i
+FileRules filename regex /.ogg/i
+FileRules filename regex /.wav/i
+FileRules filename regex /.mod/i
+FileRules filename regex /.xm/i
 # exclude video
-FileRules filename regex /.mp4/
-FileRules filename regex /.avi/
-FileRules filename regex /.ogv/
-FileRules filename regex /.ogm/
-FileRules filename regex /.mkv/
-FileRules filename regex /.mov/
+FileRules filename regex /.mp4/i
+FileRules filename regex /.avi/i
+FileRules filename regex /.ogv/i
+FileRules filename regex /.ogm/i
+FileRules filename regex /.mkv/i
+FileRules filename regex /.mov/i
 # exclude system
 FileRules filename is control
 FileRules filename is proc
@@ -1614,8 +1616,8 @@ FileRules filename is run
 FileFilter .pdf pdftotext "'%p' -"
 FileFilter .ps  ps2txt "'%p' -"
 
-FileFilterMatch unoconv "-d spreadsheet -f csv --stdout %P" /\.xls.*/
-FileFilterMatch unoconv "-d spreadsheet -f csv --stdout %P" /\.xlt.*/
+FileFilterMatch unoconv "-d spreadsheet -f csv --stdout %P" /\.xls.*/i
+FileFilterMatch unoconv "-d spreadsheet -f csv --stdout %P" /\.xlt.*/i
 FileFilter .ods unoconv "-d spreadsheet -f csv --stdout %P"
 FileFilter .ots unoconv "-d spreadsheet -f csv --stdout %P"
 FileFilter .dbf unoconv "-d spreadsheet -f csv --stdout %P"
@@ -1623,9 +1625,9 @@ FileFilter .dif unoconv "-d spreadsheet -f csv --stdout %P"
 FileFilter .uos unoconv "-d spreadsheet -f csv --stdout %P"
 FileFilter .sxc unoconv "-d spreadsheet -f csv --stdout %P"
 
-FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.doc.*/
-FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.odt.*/
-FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.rtf.*/
+FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.doc.*/i
+FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.odt.*/i
+FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.rtf.*/i
 
 IndexContents HTML* .htm .html .shtml
 IndexContents XML*  .xml
