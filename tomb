@@ -1583,7 +1583,36 @@ index_tombs() {
 
 	    cat <<EOF > $swishrc
 DefaultContents TXT*
+
+# exclude images
+FileRules filename regex /\.jp.?g/
+FileRules filename regex /.png/
+FileRules filename regex /.gif/
+FileRules filename regex /.tiff/
+FileRules filename regex /.svg/
+# exclude audio
+FileRules filename regex /.mp3/
+FileRules filename regex /.ogg/
+FileRules filename regex /.wav/
+FileRules filename regex /.mod/
+FileRules filename regex /.xm/
+# exclude video
+FileRules filename regex /.mp4/
+FileRules filename regex /.avi/
+FileRules filename regex /.ogv/
+FileRules filename regex /.ogm/
+FileRules filename regex /.mkv/
+FileRules filename regex /.mov/
+# exclude system
+FileRules filename is control
+FileRules filename is proc
+FileRules filename is sys
+FileRules filename is lock
+FileRules filename is status
+FileRules filename is run
+
 FileFilter .pdf pdftotext "'%p' -"
+FileFilter .ps  ps2txt "'%p' -"
 
 FileFilterMatch unoconv "-d spreadsheet -f csv --stdout %P" /\.xls.*/
 FileFilterMatch unoconv "-d spreadsheet -f csv --stdout %P" /\.xlt.*/
@@ -1600,6 +1629,7 @@ FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.rtf.*/
 
 IndexContents HTML* .htm .html .shtml
 IndexContents XML*  .xml
+
 IndexDir $tombmount
 IndexFile $tombmount/.swish
 EOF
