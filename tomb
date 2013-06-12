@@ -1582,8 +1582,10 @@ index_tombs() {
 	    swishrc=`safe_filename swish`
 
 	    cat <<EOF > $swishrc
+# index directives
 DefaultContents TXT*
-
+IndexDir $tombmount
+IndexFile $tombmount/.swish
 # exclude images
 FileRules filename regex /\.jp.?g/i
 FileRules filename regex /.png/i
@@ -1606,16 +1608,23 @@ FileRules filename regex /.ogm/i
 FileRules filename regex /.mkv/i
 FileRules filename regex /.mov/i
 # exclude system
+FileRules filename is ok
+FileRules filename is lock
 FileRules filename is control
+FileRules filename is status
 FileRules filename is proc
 FileRules filename is sys
-FileRules filename is lock
-FileRules filename is status
-FileRules filename is run
-
+FileRules filename is supervise
+# pdf and postscript
 FileFilter .pdf pdftotext "'%p' -"
 FileFilter .ps  ps2txt "'%p' -"
-
+# compressed files
+FileFilterMatch lesspipe "%p" /\.tgz$/i
+FileFilterMatch lesspipe "%p" /\.zip$/i
+FileFilterMatch lesspipe "%p" /\.gz$/i
+FileFilterMatch lesspipe "%p" /\.bz2$/i
+FileFilterMatch lesspipe "%p" /\.Z$/
+# spreadsheets
 FileFilterMatch unoconv "-d spreadsheet -f csv --stdout %P" /\.xls.*/i
 FileFilterMatch unoconv "-d spreadsheet -f csv --stdout %P" /\.xlt.*/i
 FileFilter .ods unoconv "-d spreadsheet -f csv --stdout %P"
@@ -1624,21 +1633,20 @@ FileFilter .dbf unoconv "-d spreadsheet -f csv --stdout %P"
 FileFilter .dif unoconv "-d spreadsheet -f csv --stdout %P"
 FileFilter .uos unoconv "-d spreadsheet -f csv --stdout %P"
 FileFilter .sxc unoconv "-d spreadsheet -f csv --stdout %P"
-
+# word documents
 FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.doc.*/i
 FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.odt.*/i
 FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.rtf.*/i
-
+# native html support
 IndexContents HTML* .htm .html .shtml
 IndexContents XML*  .xml
-
-IndexDir $tombmount
-IndexFile $tombmount/.swish
 EOF
+
 	    xxx "Using swish-e to create index"
 	    swish-e -c $swishrc -S fs -v3
 	    rm -f $swishrc
 	}
+
 	say "search index updated"
     done
 }
