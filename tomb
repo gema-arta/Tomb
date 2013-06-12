@@ -1588,25 +1588,26 @@ IndexDir $tombmount
 IndexFile $tombmount/.swish
 # exclude images
 FileRules filename regex /\.jp.?g/i
-FileRules filename regex /.png/i
-FileRules filename regex /.gif/i
-FileRules filename regex /.tiff/i
-FileRules filename regex /.svg/i
-FileRules filename regex /.xcf/i
-FileRules filename regex /.eps/i
+FileRules filename regex /\.png/i
+FileRules filename regex /\.gif/i
+FileRules filename regex /\.tiff/i
+FileRules filename regex /\.svg/i
+FileRules filename regex /\.xcf/i
+FileRules filename regex /\.eps/i
+FileRules filename regex /\.ttf/i
 # exclude audio
-FileRules filename regex /.mp3/i
-FileRules filename regex /.ogg/i
-FileRules filename regex /.wav/i
-FileRules filename regex /.mod/i
-FileRules filename regex /.xm/i
+FileRules filename regex /\.mp3/i
+FileRules filename regex /\.ogg/i
+FileRules filename regex /\.wav/i
+FileRules filename regex /\.mod/i
+FileRules filename regex /\.xm/i
 # exclude video
-FileRules filename regex /.mp4/i
-FileRules filename regex /.avi/i
-FileRules filename regex /.ogv/i
-FileRules filename regex /.ogm/i
-FileRules filename regex /.mkv/i
-FileRules filename regex /.mov/i
+FileRules filename regex /\.mp4/i
+FileRules filename regex /\.avi/i
+FileRules filename regex /\.ogv/i
+FileRules filename regex /\.ogm/i
+FileRules filename regex /\.mkv/i
+FileRules filename regex /\.mov/i
 # exclude system
 FileRules filename is ok
 FileRules filename is lock
@@ -1615,6 +1616,9 @@ FileRules filename is status
 FileRules filename is proc
 FileRules filename is sys
 FileRules filename is supervise
+FileRules filename regex /\.asc$/i
+FileRules filename regex /\.gpg$/i
+
 # pdf and postscript
 FileFilter .pdf pdftotext "'%p' -"
 FileFilter .ps  ps2txt "'%p' -"
@@ -1637,6 +1641,7 @@ FileFilter .sxc unoconv "-d spreadsheet -f csv --stdout %P"
 FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.doc.*/i
 FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.odt.*/i
 FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.rtf.*/i
+FileFilterMatch unoconv "-d document -f txt --stdout %P" /\.tex$/i
 # native html support
 IndexContents HTML* .htm .html .shtml
 IndexContents XML*  .xml
